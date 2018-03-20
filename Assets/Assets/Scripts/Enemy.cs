@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour {
                     enemyPosition.position = Vector2.MoveTowards(enemyPosition.position, checkPoints[target].position, navigationTime);
                 }
                 else {
-                    enemyPosition.position = Vector2.MoveTowards(enemyPosition.position, checkPoints[target].position, navigationTime);
+                    enemyPosition.position = Vector2.MoveTowards(enemyPosition.position, finish.position, navigationTime);
                 }
                 navigationTime = 0;
             }

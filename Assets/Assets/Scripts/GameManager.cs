@@ -19,9 +19,9 @@ public class GameManager : MonoBehaviour {
 	{
         if (instance == null)
             instance = this;
-        else if (instance != this) {
+        else if (instance != this) 
             Destroy(gameObject);
-        }
+
         DontDestroyOnLoad(gameObject);
 	}
 
@@ -38,18 +38,15 @@ public class GameManager : MonoBehaviour {
     IEnumerator spawn() {
         if (enemiesPerSpawn > 0 && enemiesOnScreen < totalEnemies)
         {
-            for (int i = 0; i < enemiesPerSpawn; i++)
+            if (enemiesOnScreen < maxEnemiesOnScreen)
             {
-                if (enemiesOnScreen < maxEnemiesOnScreen)
-                {
-                    GameObject newEnemy = Instantiate(enemies[0]) as GameObject;
-                    newEnemy.transform.position = spawnPoint.transform.position;
-                    enemiesOnScreen += 1;
-                }
+                GameObject newEnemy = Instantiate(enemies[0]) as GameObject;
+                newEnemy.transform.position = spawnPoint.transform.position;
+                enemiesOnScreen += 1;
             }
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(spawn());
         }
-        yield return new WaitForSeconds(spawnDelay);
-        StartCoroutine(spawn());
     }
 
     public void removeEnemy() {
