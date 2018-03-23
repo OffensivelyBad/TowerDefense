@@ -14,7 +14,7 @@ public class GameManager : Singleton<GameManager> {
 
 	// Use this for initialization
 	void Start () {
-        StartCoroutine(spawn());
+        StartCoroutine(Spawn());
 	}
 	
 	// Update is called once per frame
@@ -22,7 +22,7 @@ public class GameManager : Singleton<GameManager> {
 		
 	}
 
-    IEnumerator spawn() {
+    IEnumerator Spawn() {
         if (enemiesPerSpawn > 0 && enemiesOnScreen < totalEnemies)
         {
             if (enemiesOnScreen < maxEnemiesOnScreen)
@@ -32,11 +32,11 @@ public class GameManager : Singleton<GameManager> {
                 enemiesOnScreen += 1;
             }
             yield return new WaitForSeconds(0.5f);
-            StartCoroutine(spawn());
+            StartCoroutine(Spawn());
         }
     }
 
-    public void removeEnemy() {
+    public void RemoveEnemy() {
         if (enemiesOnScreen > 0) {
             enemiesOnScreen -= 1;
         }
