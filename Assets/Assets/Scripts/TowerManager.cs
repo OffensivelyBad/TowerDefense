@@ -4,11 +4,12 @@ using UnityEngine;
 public class TowerManager : Singleton<TowerManager> {
 
     private TowerBtn towerBtnPressed;
+    private SpriteRenderer spriteRenderer;
 
 	// Use this for initialization
-	void Start () {
-		
-	}
+    void Start () {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -17,8 +18,14 @@ public class TowerManager : Singleton<TowerManager> {
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
             if (hit.collider.tag == "buildSite" && hit.collider.tag != "tower")
             {
+                hit.collider.tag = "buildSiteFull";
                 PlaceTower(hit);
             }
+        }
+
+        if (spriteRenderer.enabled)
+        {
+            FollowMouse();
         }
 	}
 
@@ -27,12 +34,28 @@ public class TowerManager : Singleton<TowerManager> {
         {
             GameObject newTower = Instantiate(towerBtnPressed.TowerObject);
             newTower.transform.position = hit.transform.position;
+            spriteRenderer.enabled = false;
         }
     }
 
     public void SelectedTower(TowerBtn selectedTowerBtn) {
         towerBtnPressed = selectedTowerBtn;
-        Debug.Log("selected tower: " + towerBtnPressed.gameObject);
+        EnableDragSprite(towerBtnPressed.DragSprite);
+    }
+
+    private void FollowMouse() {
+        transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = new Vector2(transform.position.x, transform.position.y);
+    }
+
+    private void EnableDragSprite(Sprite sprite) {
+        spriteRenderer.enabled = true;
+        spriteRenderer.sprite = sprite;
+    }
+
+    private void DisableDragSprite()
+    {
+        spriteRenderer.enabled = false;
     }
 
 }
