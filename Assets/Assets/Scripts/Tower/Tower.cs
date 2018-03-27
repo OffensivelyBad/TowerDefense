@@ -66,7 +66,7 @@ public class Tower : MonoBehaviour {
     private List<Enemy> GetEnemiesInRange() {
         List<Enemy> enemiesInRange = new List<Enemy>();
         foreach(Enemy enemy in GameManager.Instance.enemyList) {
-            if(Vector2.Distance(transform.localPosition, enemy.transform.localPosition) <= attackRadius) {
+            if(Vector2.Distance(transform.localPosition, enemy.transform.localPosition) <= attackRadius && !enemy.IsDead) {
                 enemiesInRange.Add(enemy);
             }
         }

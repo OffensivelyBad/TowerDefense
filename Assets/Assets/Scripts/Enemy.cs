@@ -8,19 +8,30 @@ public class Enemy : MonoBehaviour {
     [SerializeField] Transform finish = null;
     [SerializeField] Transform[] checkPoints = null;
     [SerializeField] float navigationUpdate = 0f;
+    [SerializeField] int healthPoints = 10;
 
     private Transform enemyPosition;
     private float navigationTime = 0f;
+    private bool isDead = false;
+    private Animator anim;
+    private Collider2D collider;
+    public bool IsDead {
+        get {
+            return isDead;
+        }
+    }
 
 	// Use this for initialization
 	void Start () {
         enemyPosition = GetComponent<Transform>();
+        anim = GetComponent<Animator>();
+        collider = GetComponent<Collider2D>();
         GameManager.Instance.RegisterEnemy(this);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (checkPoints != null) {
+        if (checkPoints != null && !isDead) {
             navigationTime += Time.deltaTime;
             if (navigationTime > navigationUpdate) {
                 if (target < checkPoints.Length) {
@@ -36,11 +47,37 @@ public class Enemy : MonoBehaviour {
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-        if (collision.tag == "Checkpoint")
-            target += 1;
-        else if (collision.tag == "Finish") {
-            GameManager.Instance.UnregisterEnemy(this);
-            Destroy(gameObject);
+        switch (collision.tag) {
+            case "Checkpoint":
+                target += 1;
+                break;
+            case "Finish":
+                GameManager.Instance.UnregisterEnemy(this);
+                Destroy(gameObject);
+                break;
+            case "projectile":
+                Projectile newProjectile = collision.gameObject.GetComponent<Projectile>();
+                if (newProjectile != null)
+                {
+                    TakeDamage(newProjectile.AttackStrength);
+                    Destroy(collision.gameObject);
+                }
+                break;
         }
 	}
+
+    private void TakeDamage(int hitPoints) {
+        healthPoints -= hitPoints;
+        if (healthPoints < 0) {
+            Die();
+        } else {
+            anim.Play("Hurt1");
+        }
+    }
+
+    private void Die() {
+        anim.SetTrigger("didDie");
+        collider.enabled = false;
+        isDead = true;
+    }
 }
