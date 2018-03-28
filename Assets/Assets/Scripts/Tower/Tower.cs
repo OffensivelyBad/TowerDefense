@@ -53,7 +53,7 @@ public class Tower : MonoBehaviour {
         float enemyDistance = Vector2.Distance(enemy.transform.localPosition, transform.localPosition);
         while(enemyDistance > 0.2f && newProjectile != null) {
             var direction = enemy.transform.localPosition - transform.localPosition;
-            var angleDirection = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+            var angleDirection = (Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg) * (Mathf.PI / 2);
             newProjectile.transform.rotation = Quaternion.AngleAxis(angleDirection, Vector3.forward);
             newProjectile.transform.localPosition = Vector2.MoveTowards(newProjectile.transform.localPosition, enemy.transform.localPosition, 5f * Time.deltaTime);
             yield return null;
