@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour {
     [SerializeField] Transform[] checkPoints = null;
     [SerializeField] float navigationUpdate = 0f;
     [SerializeField] int healthPoints = 10;
+    [SerializeField] int rewardAmount;
 
     private Transform enemyPosition;
     private float navigationTime = 0f;

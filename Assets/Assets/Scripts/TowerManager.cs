@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TowerManager : Singleton<TowerManager> {
 
-    private TowerBtn towerBtnPressed;
+    public TowerBtn towerBtnPressed { get; set; }
     private SpriteRenderer spriteRenderer;
 
 	// Use this for initialization
@@ -53,7 +53,7 @@ public class TowerManager : Singleton<TowerManager> {
         spriteRenderer.sprite = sprite;
     }
 
-    private void DisableDragSprite()
+    public void DisableDragSprite()
     {
         spriteRenderer.enabled = false;
     }

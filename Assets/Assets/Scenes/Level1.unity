@@ -4669,7 +4669,7 @@ GameObject:
   - component: {fileID: 274934788}
   - component: {fileID: 274934787}
   m_Layer: 5
-  m_Name: Text
+  m_Name: buttonLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16397,7 +16397,7 @@ GameObject:
   - component: {fileID: 1059444860}
   - component: {fileID: 1059444859}
   m_Layer: 5
-  m_Name: Text
+  m_Name: moneyLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21771,6 +21771,38 @@ Prefab:
       propertyPath: maxEnemiesOnScreen
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 114227090287429970, guid: 24cd369955564475bb7f1bd39a23a7bd,
+        type: 2}
+      propertyPath: playButtonLabel
+      value: 
+      objectReference: {fileID: 274934787}
+    - target: {fileID: 114227090287429970, guid: 24cd369955564475bb7f1bd39a23a7bd,
+        type: 2}
+      propertyPath: playButton
+      value: 
+      objectReference: {fileID: 1113134748}
+    - target: {fileID: 114227090287429970, guid: 24cd369955564475bb7f1bd39a23a7bd,
+        type: 2}
+      propertyPath: currentWaveLabel
+      value: 
+      objectReference: {fileID: 534234087}
+    - target: {fileID: 114227090287429970, guid: 24cd369955564475bb7f1bd39a23a7bd,
+        type: 2}
+      propertyPath: totalEscapedLabel
+      value: 
+      objectReference: {fileID: 158630807}
+    - target: {fileID: 114227090287429970, guid: 24cd369955564475bb7f1bd39a23a7bd,
+        type: 2}
+      propertyPath: enemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 1678927109168842, guid: 87122afe096e74d18b8f41ad0f9b87c0,
+        type: 2}
+    - target: {fileID: 114227090287429970, guid: 24cd369955564475bb7f1bd39a23a7bd,
+        type: 2}
+      propertyPath: enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 1691345213211810, guid: 5eb3a6de9ebea4914b31b1b77f74e028,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 24cd369955564475bb7f1bd39a23a7bd, type: 2}
   m_IsPrefabParent: 0
