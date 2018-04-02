@@ -9511,6 +9511,12 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.85333335, y: 0.85333335}
   m_EdgeRadius: 0
+--- !u!114 &617862086 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114227090287429970, guid: 24cd369955564475bb7f1bd39a23a7bd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1394002899}
+  m_Script: {fileID: 11500000, guid: 396e4ab2b01f34d63bfd926ee39b3416, type: 3}
 --- !u!1 &622720320
 GameObject:
   m_ObjectHideFlags: 0
@@ -17258,7 +17264,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1113134749}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 617862086}
+        m_MethodName: PlayButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1113134749
@@ -21759,12 +21776,12 @@ Prefab:
     - target: {fileID: 114227090287429970, guid: 24cd369955564475bb7f1bd39a23a7bd,
         type: 2}
       propertyPath: enemiesPerSpawn
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114227090287429970, guid: 24cd369955564475bb7f1bd39a23a7bd,
         type: 2}
       propertyPath: totalEnemies
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 114227090287429970, guid: 24cd369955564475bb7f1bd39a23a7bd,
         type: 2}
@@ -21803,6 +21820,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1691345213211810, guid: 5eb3a6de9ebea4914b31b1b77f74e028,
         type: 2}
+    - target: {fileID: 114227090287429970, guid: 24cd369955564475bb7f1bd39a23a7bd,
+        type: 2}
+      propertyPath: totalMoneyLabel
+      value: 
+      objectReference: {fileID: 1059444859}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 24cd369955564475bb7f1bd39a23a7bd, type: 2}
   m_IsPrefabParent: 0

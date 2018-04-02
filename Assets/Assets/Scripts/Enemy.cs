@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-    [SerializeField] int target = 0;
-    [SerializeField] Transform finish = null;
-    [SerializeField] Transform[] checkPoints = null;
-    [SerializeField] float navigationUpdate = 0f;
-    [SerializeField] int healthPoints = 10;
-    [SerializeField] int rewardAmount;
+    [SerializeField] private int target = 0;
+    [SerializeField] private Transform finish = null;
+    [SerializeField] private Transform[] checkPoints = null;
+    [SerializeField] private float navigationUpdate = 0f;
+    [SerializeField] private int healthPoints = 10;
+    [SerializeField] private int rewardAmount;
 
     private Transform enemyPosition;
     private float navigationTime = 0f;
     private bool isDead = false;
     private Animator anim;
-    private Collider2D collider;
+    private Collider2D colliderComponent;
     public bool IsDead {
         get {
             return isDead;
+        }
+    }
+    public int RewardAmount {
+        get {
+            return rewardAmount;
         }
     }
 
@@ -26,7 +31,7 @@ public class Enemy : MonoBehaviour {
 	void Start () {
         enemyPosition = GetComponent<Transform>();
         anim = GetComponent<Animator>();
-        collider = GetComponent<Collider2D>();
+        colliderComponent = GetComponent<Collider2D>();
         GameManager.Instance.RegisterEnemy(this);
 	}
 	
@@ -53,8 +58,7 @@ public class Enemy : MonoBehaviour {
                 target += 1;
                 break;
             case "Finish":
-                GameManager.Instance.UnregisterEnemy(this);
-                Destroy(gameObject);
+                GameManager.Instance.EnemyEscaped(this);
                 break;
             case "projectile":
                 Projectile newProjectile = collision.gameObject.GetComponent<Projectile>();
@@ -77,8 +81,9 @@ public class Enemy : MonoBehaviour {
     }
 
     private void Die() {
+        GameManager.Instance.EnemyKilled(this);
         anim.SetTrigger("didDie");
-        collider.enabled = false;
+        colliderComponent.enabled = false;
         isDead = true;
     }
 }
