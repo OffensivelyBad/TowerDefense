@@ -8,8 +8,8 @@ public class TowerBtn : MonoBehaviour {
             return towerPrice;
         }
     }
-    [SerializeField] private GameObject towerObject;
-    public GameObject TowerObject {
+    [SerializeField] private Tower towerObject;
+    public Tower TowerObject {
         get {
             return towerObject;
         }

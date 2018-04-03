@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public enum GameStatus {
-    next, play, gameover, win
+    menu, next, play, gameover, win
 }
 
 public class GameManager : Singleton<GameManager> {
@@ -13,6 +13,8 @@ public class GameManager : Singleton<GameManager> {
     [SerializeField] Text currentWaveLabel;
     [SerializeField] Text totalEscapedLabel;
     [SerializeField] Text playButtonLabel;
+    [SerializeField] Text bannerText;
+    [SerializeField] Image banner;
     [SerializeField] Button playButton;
     [SerializeField] GameObject spawnPoint = null;
     [SerializeField] GameObject[] enemies = null;
@@ -29,7 +31,13 @@ public class GameManager : Singleton<GameManager> {
     private int enemyIndexToSpawn = 0;
     private int escapedEnemyLimit = 10;
     private int waveTotalEnemies = 0;
-    private GameStatus currentState = GameStatus.win;
+    private GameStatus currentState = GameStatus.menu;
+
+    public GameStatus CurrentState {
+        get {
+            return currentState;
+        }
+    }
 
     public int TotalEscaped {
         get {
@@ -116,14 +124,14 @@ public class GameManager : Singleton<GameManager> {
     }
 
     private void SetGameState() {
+        if ((roundEscaped + totalKilled) >= waveTotalEnemies && waveNumber >= totalWaves) {
+            currentState = GameStatus.win;
+        }
         if (totalEscaped >= escapedEnemyLimit) {
             currentState = GameStatus.gameover;
         }
         else if ((roundEscaped + totalKilled) >= waveTotalEnemies) {
             currentState = GameStatus.next;
-        }
-        else if (waveNumber >= totalWaves) {
-            currentState = GameStatus.win;
         }
         else {
             currentState = GameStatus.play;
@@ -135,17 +143,29 @@ public class GameManager : Singleton<GameManager> {
         switch (currentState)
         {
             case GameStatus.gameover:
+                banner.gameObject.SetActive(true);
+                bannerText.text = "You're a loser!";
                 playButton.gameObject.SetActive(true);
                 playButtonLabel.text = "Play Again!";
                 break;
             case GameStatus.next:
+                banner.gameObject.SetActive(false);
                 playButton.gameObject.SetActive(true);
                 playButtonLabel.text = "Next Wave";
                 break;
             case GameStatus.play:
+                banner.gameObject.SetActive(false);
                 playButton.gameObject.SetActive(false);
                 break;
             case GameStatus.win:
+                banner.gameObject.SetActive(true);
+                bannerText.text = "You win! Yay!";
+                playButton.gameObject.SetActive(true);
+                playButtonLabel.text = "Play";
+                break;
+            case GameStatus.menu:
+                banner.gameObject.SetActive(true);
+                bannerText.text = "Can you win?";
                 playButton.gameObject.SetActive(true);
                 playButtonLabel.text = "Play";
                 break;
@@ -180,6 +200,7 @@ public class GameManager : Singleton<GameManager> {
                 waveTotalEnemies += waveNumber;
                 break;
             default:
+                TowerManager.Instance.ResetTowers();
                 waveTotalEnemies = totalEnemies;
                 totalEscaped = 0;
                 totalMoney = startMoney;
@@ -194,6 +215,17 @@ public class GameManager : Singleton<GameManager> {
         currentState = GameStatus.play;
         ShowMenu();
         StartCoroutine(Spawn());
+    }
+
+    public bool CanBuyItem(int price) {
+        if (totalMoney >= price) {
+            return true;
+        }
+        return false;
+    }
+
+    public void BuyItem(int price) {
+        totalMoney -= price;
     }
 
 }

@@ -22,6 +22,9 @@ public class Tower : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (GameManager.Instance.CurrentState != GameStatus.play) {
+            return;
+        }
         attackCounter += Time.deltaTime;
         if (attackCounter >= timeBetweenAttacks) {
             attackCounter = 0;

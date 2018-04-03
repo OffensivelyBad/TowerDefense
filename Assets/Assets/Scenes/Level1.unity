@@ -1695,22 +1695,22 @@ Prefab:
     - target: {fileID: 224831739030407088, guid: 40f8d804c0ee5431fbadab4dd9ca3651,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224831739030407088, guid: 40f8d804c0ee5431fbadab4dd9ca3651,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -40
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224831739030407088, guid: 40f8d804c0ee5431fbadab4dd9ca3651,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 70
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224831739030407088, guid: 40f8d804c0ee5431fbadab4dd9ca3651,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 80
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224831739030407088, guid: 40f8d804c0ee5431fbadab4dd9ca3651,
         type: 2}
@@ -1720,7 +1720,7 @@ Prefab:
     - target: {fileID: 224831739030407088, guid: 40f8d804c0ee5431fbadab4dd9ca3651,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224831739030407088, guid: 40f8d804c0ee5431fbadab4dd9ca3651,
         type: 2}
@@ -1730,7 +1730,7 @@ Prefab:
     - target: {fileID: 224831739030407088, guid: 40f8d804c0ee5431fbadab4dd9ca3651,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224831739030407088, guid: 40f8d804c0ee5431fbadab4dd9ca3651,
         type: 2}
@@ -21825,6 +21825,16 @@ Prefab:
       propertyPath: totalMoneyLabel
       value: 
       objectReference: {fileID: 1059444859}
+    - target: {fileID: 114227090287429970, guid: 24cd369955564475bb7f1bd39a23a7bd,
+        type: 2}
+      propertyPath: bannerText
+      value: 
+      objectReference: {fileID: 2064595346}
+    - target: {fileID: 114227090287429970, guid: 24cd369955564475bb7f1bd39a23a7bd,
+        type: 2}
+      propertyPath: banner
+      value: 
+      objectReference: {fileID: 855052094}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 24cd369955564475bb7f1bd39a23a7bd, type: 2}
   m_IsPrefabParent: 0
@@ -32826,7 +32836,7 @@ GameObject:
   - component: {fileID: 2064595347}
   - component: {fileID: 2064595346}
   m_Layer: 5
-  m_Name: Text
+  m_Name: bannerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
