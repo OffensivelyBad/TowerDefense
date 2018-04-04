@@ -12,10 +12,14 @@ public class TowerManager : Singleton<TowerManager> {
 	// Use this for initialization
     void Start () {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.enabled = false;
     }
 	
 	// Update is called once per frame
 	void Update () {
+        if (GameManager.Instance.CurrentState != GameStatus.play) {
+            return;
+        }
         if (Input.GetMouseButtonDown(0)) {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
@@ -49,7 +53,7 @@ public class TowerManager : Singleton<TowerManager> {
     }
 
     private void SelectedTower(TowerBtn selectedTowerBtn) {
-        if (GameManager.Instance.CanBuyItem(selectedTowerBtn.TowerPrice))
+        if (GameManager.Instance.CanBuyItem(selectedTowerBtn.TowerPrice) && GameManager.Instance.CurrentState == GameStatus.play)
         {
             towerBtnPressed = selectedTowerBtn;
             EnableDragSprite(towerBtnPressed.DragSprite);
@@ -76,7 +80,7 @@ public class TowerManager : Singleton<TowerManager> {
 
     public void ResetTowers() {
         foreach(Tower tower in towerList) {
-            Destroy(tower);
+            Destroy(tower.gameObject);
         }
         towerList.Clear();
         foreach(Collider2D site in buildSiteList) {

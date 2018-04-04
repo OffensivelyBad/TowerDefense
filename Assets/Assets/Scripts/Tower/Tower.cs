@@ -6,7 +6,7 @@ public class Tower : MonoBehaviour {
 
     [SerializeField] private float timeBetweenAttacks = 1f;
     [SerializeField] private float attackRadius = 1f;
-    [SerializeField] private Projectile projectile;
+    [SerializeField] private Projectile projectile = null;
     private float attackCounter = 0f;
     private Enemy NearestEnemy {
         get {
@@ -15,11 +15,6 @@ public class Tower : MonoBehaviour {
     }
     private bool isAttacking = false;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
 	// Update is called once per frame
 	void Update () {
         if (GameManager.Instance.CurrentState != GameStatus.play) {

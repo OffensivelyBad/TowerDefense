@@ -12,7 +12,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
             else if (instance != theObject)
                 Destroy(theObject);
 
-            DontDestroyOnLoad(theObject);
+            //DontDestroyOnLoad(theObject);
             return instance;
         }
     }

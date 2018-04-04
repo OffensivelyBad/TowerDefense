@@ -72,7 +72,7 @@ public class GameManager : Singleton<GameManager> {
 	void Start () {
         playButton.gameObject.SetActive(false);
         waveTotalEnemies = totalEnemies;
-        totalMoney = startMoney;
+        TotalMoney = startMoney;
         ShowMenu();
 	}
 	
@@ -127,7 +127,7 @@ public class GameManager : Singleton<GameManager> {
         if ((roundEscaped + totalKilled) >= waveTotalEnemies && waveNumber >= totalWaves) {
             currentState = GameStatus.win;
         }
-        if (totalEscaped >= escapedEnemyLimit) {
+        else if (totalEscaped >= escapedEnemyLimit) {
             currentState = GameStatus.gameover;
         }
         else if ((roundEscaped + totalKilled) >= waveTotalEnemies) {
@@ -203,8 +203,7 @@ public class GameManager : Singleton<GameManager> {
                 TowerManager.Instance.ResetTowers();
                 waveTotalEnemies = totalEnemies;
                 totalEscaped = 0;
-                totalMoney = startMoney;
-                totalMoneyLabel.text = totalMoney.ToString();
+                TotalMoney = startMoney;
                 totalEscapedLabel.text = "Escaped " + 0 + "/" + escapedEnemyLimit;
                 break;
         }
@@ -225,7 +224,7 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void BuyItem(int price) {
-        totalMoney -= price;
+        TotalMoney -= price;
     }
 
 }
