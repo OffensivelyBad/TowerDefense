@@ -45,6 +45,7 @@ public class TowerManager : Singleton<TowerManager> {
             RegisterTower(newTower);
             newTower.transform.position = hit.transform.position;
             spriteRenderer.enabled = false;
+            GameManager.Instance.PlaySound(SoundManager.Instance.TowerBuilt);
         }
     }
 

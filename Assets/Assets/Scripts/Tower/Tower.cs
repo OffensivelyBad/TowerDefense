@@ -42,8 +42,23 @@ public class Tower : MonoBehaviour {
         if (enemy != null)
         {
             Projectile newProjectile = Instantiate(projectile) as Projectile;
+            PlaySoundForProjectile(newProjectile);
             newProjectile.transform.localPosition = transform.localPosition;
             StartCoroutine(MoveProjectile(newProjectile, enemy));
+        }
+    }
+
+    private void PlaySoundForProjectile(Projectile proj) {
+        switch (proj.ProjectileType) {
+            case ProjectileTypes.rock:
+                GameManager.Instance.PlaySound(SoundManager.Instance.Rock);
+                break;
+            case ProjectileTypes.arrow:
+                GameManager.Instance.PlaySound(SoundManager.Instance.Arrow);
+                break;
+            case ProjectileTypes.fireball:
+                GameManager.Instance.PlaySound(SoundManager.Instance.Fireball);
+                break;
         }
     }
 

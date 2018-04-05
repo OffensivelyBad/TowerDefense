@@ -76,11 +76,13 @@ public class Enemy : MonoBehaviour {
         if (healthPoints < 0) {
             Die();
         } else {
+            GameManager.Instance.PlaySound(SoundManager.Instance.Hit);
             anim.Play("Hurt1");
         }
     }
 
     private void Die() {
+        GameManager.Instance.PlaySound(SoundManager.Instance.Death);
         GameManager.Instance.EnemyKilled(this);
         anim.SetTrigger("didDie");
         colliderComponent.enabled = false;

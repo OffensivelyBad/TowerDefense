@@ -9,13 +9,13 @@ public enum GameStatus {
 
 public class GameManager : Singleton<GameManager> {
     [SerializeField] int totalWaves = 10;
-    [SerializeField] Text totalMoneyLabel;
-    [SerializeField] Text currentWaveLabel;
-    [SerializeField] Text totalEscapedLabel;
-    [SerializeField] Text playButtonLabel;
-    [SerializeField] Text bannerText;
-    [SerializeField] Image banner;
-    [SerializeField] Button playButton;
+    [SerializeField] Text totalMoneyLabel = null;
+    [SerializeField] Text currentWaveLabel = null;
+    [SerializeField] Text totalEscapedLabel = null;
+    [SerializeField] Text playButtonLabel = null;
+    [SerializeField] Text bannerText = null;
+    [SerializeField] Image banner = null;
+    [SerializeField] Button playButton = null;
     [SerializeField] GameObject spawnPoint = null;
     [SerializeField] GameObject[] enemies = null;
     [SerializeField] int maxEnemiesOnScreen = 1;
@@ -32,6 +32,7 @@ public class GameManager : Singleton<GameManager> {
     private int escapedEnemyLimit = 10;
     private int waveTotalEnemies = 0;
     private GameStatus currentState = GameStatus.menu;
+    private AudioSource audioPlayer;
 
     public GameStatus CurrentState {
         get {
@@ -70,6 +71,7 @@ public class GameManager : Singleton<GameManager> {
 
 	// Use this for initialization
 	void Start () {
+        audioPlayer = GetComponent<AudioSource>();
         playButton.gameObject.SetActive(false);
         waveTotalEnemies = totalEnemies;
         TotalMoney = startMoney;
@@ -147,6 +149,7 @@ public class GameManager : Singleton<GameManager> {
                 bannerText.text = "You're a loser!";
                 playButton.gameObject.SetActive(true);
                 playButtonLabel.text = "Play Again!";
+                PlaySound(SoundManager.Instance.GameOver);
                 break;
             case GameStatus.next:
                 banner.gameObject.SetActive(false);
@@ -205,6 +208,7 @@ public class GameManager : Singleton<GameManager> {
                 totalEscaped = 0;
                 TotalMoney = startMoney;
                 totalEscapedLabel.text = "Escaped " + 0 + "/" + escapedEnemyLimit;
+                PlaySound(SoundManager.Instance.NewGame);
                 break;
         }
         DestroyAllEnemies();
@@ -225,6 +229,10 @@ public class GameManager : Singleton<GameManager> {
 
     public void BuyItem(int price) {
         TotalMoney -= price;
+    }
+
+    public void PlaySound(AudioClip clip) {
+        audioPlayer.PlayOneShot(clip);
     }
 
 }
