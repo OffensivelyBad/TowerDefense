@@ -28,7 +28,6 @@ public class GameManager : Singleton<GameManager> {
     private int totalEscaped = 0;
     private int roundEscaped = 0;
     private int totalKilled = 0;
-    private int enemyIndexToSpawn = 0;
     private int escapedEnemyLimit = 10;
     private int waveTotalEnemies = 0;
     private GameStatus currentState = GameStatus.menu;
@@ -88,12 +87,17 @@ public class GameManager : Singleton<GameManager> {
         {
             if (enemyList.Count < maxEnemiesOnScreen)
             {
-                GameObject newEnemy = Instantiate(enemies[0]) as GameObject;
+                int enemyIndex = GetEnemyIndexForWave(waveNumber, enemyList.Count);
+                GameObject newEnemy = Instantiate(enemies[enemyIndex]) as GameObject;
                 newEnemy.transform.position = spawnPoint.transform.position;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(spawnDelay);
             StartCoroutine(Spawn());
         }
+    }
+
+    private int GetEnemyIndexForWave(int wave, int enemyCount) {
+        return Random.Range(0, Mathf.Min(wave, enemyCount - 1));
     }
 
     public void RegisterEnemy(Enemy enemy) {

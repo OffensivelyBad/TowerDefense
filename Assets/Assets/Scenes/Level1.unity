@@ -21813,11 +21813,6 @@ Prefab:
       propertyPath: playButton
       value: 
       objectReference: {fileID: 1113134748}
-    - target: {fileID: 114227090287429970, guid: 24cd369955564475bb7f1bd39a23a7bd,
-        type: 2}
-      propertyPath: totalWaves
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 24cd369955564475bb7f1bd39a23a7bd, type: 2}
   m_IsPrefabParent: 0
